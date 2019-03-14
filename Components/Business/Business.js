@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-	StyleSheet,
-	View,
-	Image,
-	Text
-} from 'react-native';
+import {StyleSheet,View,Image,Text, Alert, TouchableHighlight} from 'react-native';	
 import StarRating from './StarRating/StarRating';
 import {Font} from 'expo';
 
@@ -15,28 +10,38 @@ let business = {
     imgSrc: require('./plumber.jpg'),
     businessAddress: 'Valley Arcade',
     businessCity: 'Nairobi',
-    category: 'Plumbing',
+    category: 'Plumbing and Home Repairs',
     ratingObj: {ratings: 0.5, reviews: 5000}  
 }
 export default class Business extends Component{
+    onPressButton(){
+        Alert.alert('You should be directed to request service page');
+    }
     
 	render() {
 		return (
-			<View style={styles.Business}>
-                <Image style={styles.imageContainer} source={business.imgSrc} />
-                <View>
-                    <Text style={styles.businessName}>{business.businessName}</Text>
-                    <View style={styles.businessInfo}>
-                        <View style={styles.businessAddress}>
-                            <Text style={styles.p}>{business.businessAddress}</Text>
-                            <Text style={styles.p}>{business.businessCity}</Text>
-                        </View>
-                        <View style={styles.businessReviews}>
+            <View style={{display: 'flex', margin: 10, borderBottomWidth: 1, borderBottomColor: '#DCDCDC'}}>
+                <View style={styles.Business}>
+                    <Image style={styles.imageContainer} source={business.imgSrc} />
+                    <View>
+                        <Text style={styles.businessName}>{business.businessName}</Text>
+                        <View style={styles.businessInfo}>
                             <Text style={styles.p}>{business.category}</Text>
-                            <StarRating ratingObj={business.ratingObj} />
+                            <View style={styles.businessAddress}>
+                                <Text style={styles.p}>{business.businessAddress}</Text>
+                                <Text style={styles.p}>{business.businessCity}</Text>
+                            </View>
+                            <View style={styles.businessReviews}>
+                                <StarRating ratingObj={business.ratingObj} />
+                            </View>
                         </View>
                     </View>
                 </View>
+                <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={{marginBottom: 8}}>
+                    <View style={styles.button}>
+                        <Text style={[styles.p, {fontWeight: '400'}]}>Request Service</Text>
+                    </View>
+                </TouchableHighlight>
             </View>
 		);
 	}
@@ -50,20 +55,20 @@ const styles = StyleSheet.create({
         width: 160,
         marginTop: 8,
         marginRight: 32,
-        marginBottom: 8,
+        marginBottom: 4,
         marginLeft: 10
     },
     
     imageContainer: {
         width: 100,
         height: 100,
-        marginBottom: 16,
+        marginBottom: 8,
         marginRight: 8
     },
 
     businessName: {
         marginBottom: 8,
-        fontSize: 19.2,
+        fontSize: 20,
         fontWeight: '600'
     },
 
@@ -89,5 +94,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'space-between',
         color: '#3eb308'
+    },
+
+    button: {
+     alignItems: 'center',
+     backgroundColor: 'rgba(220, 220, 220, 0.8)',
+     borderRadius:  10,
+     height: 40,
+     justifyContent: 'center'  
     }
+
 });

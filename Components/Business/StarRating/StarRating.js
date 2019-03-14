@@ -34,7 +34,7 @@ export default class StarRating extends Component{
 		return (
 			<View style={ styles.container }>
 				{ stars }
-				<Text style={styles.text}>{`${ratingObj.reviews} reviews`}</Text>
+				<Text style={styles.text}>{`(${ratingObj.reviews} reviews)`}</Text>
 			</View>
 		);
 	}
