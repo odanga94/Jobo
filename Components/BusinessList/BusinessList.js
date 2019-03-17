@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, ScrollView, FlatList, Text} from 'react-native';
 import Business from '../Business/Business';
+import {Font} from 'expo';
 
-let businesses = [
+Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
+
+
+/* let businesses = [
     {
         businessName: 'The Plumbers',
         imgSrc: require('../../assets/BusinessPics/plumber.jpg'),
@@ -93,16 +97,30 @@ let businesses = [
         ratingObj: {ratings: 3.8, reviews: 700},
         id: 10  
     }
-]
+] */
+
 export default class BusinessList extends Component{
     render(){
+        let data = this.props.businesses
         return(
-            <View style={styles.businessList}>
+            /* <ScrollView style={styles.businessList}>
                 {
-                    businesses ? businesses.map((business) => {return <Business business={business} key={business.id} />}) : null
+                    this.props.businesses ? this.props.businesses.map((business) => {return <Business business={business} key={business.id} />}) : null
                 }
-            </View>
+            </ScrollView> */
+             data ? <FlatList style={styles.businessList} data={data} renderItem={({item}) => {return <Business business={item} />}} /> : 
+            <Text style={styles.text}>Sorry, there are no results.</Text> 
 
         );
     }
 }
+
+const styles = StyleSheet.create({
+    businessList: {
+        display: 'flex',
+    },
+    text: {
+        fontFamily: 'Poppins',
+        fontSize: 20
+    }
+})

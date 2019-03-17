@@ -5,14 +5,15 @@ import {Font} from 'expo';
 
 Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
-let business = {
+/* let this.props.business = {
     businessName: 'The Plumbers',
     imgSrc: require('./plumber.jpg'),
     businessAddress: 'Valley Arcade',
     businessCity: 'Nairobi',
     category: 'Plumbing and Home Repairs',
     ratingObj: {ratings: 0.5, reviews: 5000}  
-}
+}*/
+
 export default class Business extends Component{
     onPressButton(){
         Alert.alert('You should be directed to request service page');
@@ -20,19 +21,19 @@ export default class Business extends Component{
     
 	render() {
 		return (
-            <View style={{display: 'flex', margin: 10, borderBottomWidth: 1, borderBottomColor: '#DCDCDC'}}>
+            <View style={{display: 'flex', margin: 8, borderBottomWidth: 1, borderBottomColor: '#DCDCDC'}}>
                 <View style={styles.Business}>
-                    <Image style={styles.imageContainer} source={business.imgSrc} />
+                    <Image style={styles.imageContainer} source={this.props.business.imgSrc} />
                     <View>
-                        <Text style={styles.businessName}>{business.businessName}</Text>
+                        <Text style={styles.businessName}>{this.props.business.businessName}</Text>
                         <View style={styles.businessInfo}>
-                            <Text style={styles.p}>{business.category}</Text>
+                            <Text style={styles.p}>{this.props.business.category}</Text>
                             <View style={styles.businessAddress}>
-                                <Text style={styles.p}>{business.businessAddress}</Text>
-                                <Text style={styles.p}>{business.businessCity}</Text>
+                                <Text style={styles.p}>{this.props.business.businessAddress}</Text>
+                                <Text style={styles.p}>{this.props.business.businessCity}</Text>
                             </View>
                             <View style={styles.businessReviews}>
-                                <StarRating ratingObj={business.ratingObj} />
+                                <StarRating ratingObj={this.props.business.ratingObj} />
                             </View>
                         </View>
                     </View>
@@ -54,9 +55,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: 160,
         marginTop: 8,
-        marginRight: 32,
         marginBottom: 4,
-        marginLeft: 10
     },
     
     imageContainer: {
