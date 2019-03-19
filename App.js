@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import {Font, Constants} from 'expo';
-import BusinessList from './Components/BusinessList/BusinessList';
+import ProfessionalList from './Components/ProfessionalList/ProfessionalList';
+// import BusinessList from './Components/BusinessList/BusinessList';
 import SearchBar from './Components/SearchBar/SearchBar';
+import Map from './Components/Map/Map';
 
 Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
 
-let businesses = [
+/* let businesses = [
   {
       businessName: 'The Plumbers',
       imgSrc: require('./assets/BusinessPics/plumber.jpg'),
@@ -97,19 +99,20 @@ let businesses = [
       ratingObj: {ratings: 3.8, reviews: 700},
       id: 10  
   }
-]
+] */
 
 export default class App extends React.Component {
   constructor(props){
     super(props);
-    this.state = {businesses: []}
+    this.state = {searchResults: []}
   }
 
-  searchBusinessByCategory(){
+  searchBusinessByCategory(category, location){
     /* Insert method here to search businesses by category i.e. plumber, electrician etc.
        Pass the method as an event handler when the user presses search
        Pass the results to BusinessList so they can be rendered
     */
+
   }
   render() {
     return (
@@ -120,8 +123,10 @@ export default class App extends React.Component {
           <Text style={styles.yellow}>b</Text>
           <Text style={styles.red}>o</Text>
         </View>
-        <SearchBar />
+        {/* <SearchBar />
         <BusinessList businesses={businesses}/> 
+        <Map /> */ }
+        <ProfessionalList/> 
       </View>  
     );
   }
@@ -129,11 +134,12 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   bigContainer: {
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    marginLeft: 8,
-    marginRight: 8
+    // marginLeft: 8,
+    // marginRight: 8
   },
 
   container: {

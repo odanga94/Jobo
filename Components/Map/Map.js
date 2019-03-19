@@ -1,0 +1,61 @@
+import React from 'react';
+import {StyleSheet,View,Image,Text, Alert, TouchableHighlight} from 'react-native';	
+// import MapView  from 'react-native-maps';
+import {Font, MapView, PROVIDER_GOOGLE} from 'expo';
+
+Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
+
+
+export default class Map extends React.Component {
+  onPressButton(){
+    Alert.alert('You should be directed to request service page');
+  }
+
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{flex: 1}}
+          /* initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }} */ showsUserLocation={true}
+        />
+       <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={styles.highlight}>
+            <View style={styles.button}>
+                <Text style={styles.p}>Request a Service</Text>
+            </View>
+        </TouchableHighlight> 
+      </View>     
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  highlight: {
+    bottom: 50,
+    marginLeft: 10,
+    marginRight: 10,
+    // position: "absolute",
+    // width: window.width
+  },
+
+  p: {
+    fontSize: 17,
+    fontWeight: '600',
+    fontFamily: 'Poppins',
+    color: '#3eb308'
+  },
+
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius:  5,
+    height: 40,
+    justifyContent: 'center' ,
+    shadowColor: 'rgb(220,220,220)',
+  }
+})

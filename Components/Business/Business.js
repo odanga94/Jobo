@@ -5,7 +5,7 @@ import {Font} from 'expo';
 
 Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
-/* let this.props.business = {
+/*  let this.props.business = {
     businessName: 'The Plumbers',
     imgSrc: require('./plumber.jpg'),
     businessAddress: 'Valley Arcade',

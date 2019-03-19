@@ -23,7 +23,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.Jobo.Jobo",
+      "supportsTablet": true,
+      "config" : {
+        "googleMapsApiKey": "AIzaSyB2Jl1PAwJD8opKHh2MbMRmIl4RDfp4PIk"
+      }
+    },
+    "android": {
+      "package": "com.Jobo.Jobo",
+      "config": {
+        "googleMaps" :{
+          "apiKey": "AIzaSyB2Jl1PAwJD8opKHh2MbMRmIl4RDfp4PIk" 
+        } 
+      }
     }
   }
 }
