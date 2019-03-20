@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, FlatList, Text} from 'react-native';
+import {StyleSheet, ScrollView, FlatList, Text, View} from 'react-native';
 import Professional from '../Professional/Professional';
 import {Font} from 'expo';
 
@@ -46,14 +46,34 @@ let professionals =[
     {
         category: 'Taxes',
         imgSrc: require('../../assets/ProPics/taxes-color.png')
+    },
+    {
+        category: 'Builder',
+        imgSrc: require('../../assets/ProPics/builder.png')
     }
 ]
 
 
 export default class ProfessionalList extends Component{
+    constructor(props){
+        super(props);
+        this.state = {numColumns: 3}
+    }
+
+    formatData(data, numColumns){
+        const numberOfFullRows = Math.floor(data.length / numColumns);
+        let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
+        while(numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0){
+            data.push({});
+            numberOfElementsLastRow++;
+        }
+        return data;
+    }
+
     render(){
         return(
-            <FlatList style={styles.professionalList} numColumns={3} data={professionals} renderItem={({item, index}) => {return <Professional professional={item} key={index} />}} />
+            <FlatList style={styles.professionalList} numColumns={3} data={this.formatData(professionals, this.state.numColumns)}
+             renderItem={({item, index}) => {return Object.keys(item).length !== 0 ? <Professional style={styles.item} professional={item} key={index} /> : <View style={[styles.item, styles.itemInvisible]} key={index} /> }} />
         );
     }
 }
@@ -61,15 +81,21 @@ export default class ProfessionalList extends Component{
 const styles = StyleSheet.create({
     professionalList: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        // backgroundColor: '#f5f5f5',
         justifyContent: 'space-between',
         display: 'flex',
-        /* display: 'flex',
-        
+        /* display: 'flex',     
         marginLeft: 4,
         alignItems: 'center', */
-        marginVertical: 20
+        marginVertical: 20,
+        margin: 2
     },
+
+    itemInvisible: {
+        flex: 1,
+        backgroundColor: 'transparent'
+    },
+
     text: {
         fontFamily: 'Poppins',
         fontSize: 20

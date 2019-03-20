@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         //height: 110,
         borderWidth: 2, 
         borderColor: 'white',
-        flex: 1
+        flex: 1,
+        backgroundColor: '#f5f5f5',
     },
 
 	Professional: {
