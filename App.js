@@ -125,8 +125,9 @@ export default class App extends React.Component {
         </View>
         {/* <SearchBar />
         <BusinessList businesses={businesses}/> 
-        <Map /> */ }
-        <ProfessionalList/> 
+        <Map /> 
+        <ProfessionalList/> */ }
+        <Map />
       </View>  
     );
   }

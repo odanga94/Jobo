@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View,Image,Text, Alert, TouchableHighlight} from 'react-native';	
+import {StyleSheet,View,Image,Text, Alert, TouchableHighlight, Dimensions} from 'react-native';	
 // import MapView  from 'react-native-maps';
 import {Font, MapView, PROVIDER_GOOGLE} from 'expo';
 
@@ -7,8 +7,52 @@ Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
 
 export default class Map extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {region: {}}
+    this.getCurrentPosition = this.getCurrentPosition.bind(this);
+  }
   onPressButton(){
     Alert.alert('You should be directed to request service page');
+  }
+
+  getCurrentPosition() {
+    const LATITUDE_DELTA = 0.005;
+    const LONGITUDE_DELTA = 0.005;
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          let region = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          };
+          this.setState({region: region});
+        },
+        (error) => {
+          //TODO: better design
+          switch (error.code) {
+            case 1:
+              if (Platform.OS === "ios") {
+                Alert.alert("Please allow this app to access your location in settings");
+              } else {
+                Alert.alert("Please allow this app to access your location in settings");
+              }
+              break;
+            default:
+              Alert.alert("Error accessing location");
+          }
+        }
+      );
+    } catch(e) {
+      alert(e.message || "");
+    }
+  }
+
+
+  componentWillMount(){
+    this.getCurrentPosition();
   }
 
   render() {
@@ -16,6 +60,7 @@ export default class Map extends React.Component {
       <View style={{flex: 1}}>
         <MapView
           provider={PROVIDER_GOOGLE}
+          region={this.state.region}
           style={{flex: 1}}
           /* initialRegion={{
             latitude: 37.78825,
@@ -36,26 +81,28 @@ export default class Map extends React.Component {
 
 const styles = StyleSheet.create({
   highlight: {
-    bottom: 50,
-    marginLeft: 10,
-    marginRight: 10,
-    // position: "absolute",
-    // width: window.width
+    bottom: 30,
+    flex: 1,
+    position: "absolute",
+    width: Dimensions.get('window').width
   },
 
   p: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: '600',
     fontFamily: 'Poppins',
     color: '#3eb308'
   },
 
   button: {
+    flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderRadius:  5,
     height: 40,
     justifyContent: 'center' ,
     shadowColor: 'rgb(220,220,220)',
+    marginLeft: 10, 
+    marginRight: 10
   }
 })
