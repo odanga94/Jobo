@@ -17,16 +17,14 @@ export default class Map extends React.Component {
   }
 
   getCurrentPosition() {
-    const LATITUDE_DELTA = 0.005;
-    const LONGITUDE_DELTA = 0.005;
     try {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           let region = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
           };
           this.setState({region: region});
         },
@@ -71,7 +69,7 @@ export default class Map extends React.Component {
         />
        <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={styles.highlight}>
             <View style={styles.button}>
-                <Text style={styles.p}>Request a Service</Text>
+                <Text style={styles.p}>View Services</Text>
             </View>
         </TouchableHighlight> 
       </View>     

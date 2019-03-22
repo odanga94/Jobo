@@ -73,7 +73,7 @@ export default class ProfessionalList extends Component{
     render(){
         return(
             <FlatList style={styles.professionalList} numColumns={3} data={this.formatData(professionals, this.state.numColumns)}
-             renderItem={({item, index}) => {return Object.keys(item).length !== 0 ? <Professional style={styles.item} professional={item} key={index} /> : <View style={[styles.item, styles.itemInvisible]} key={index} /> }} />
+             renderItem={({item, index}) => {return Object.keys(item).length !== 0 ? <Professional professional={item} key={index} /> : <View style={[styles.item, styles.itemInvisible]} key={index} /> }} />
         );
     }
 }

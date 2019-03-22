@@ -5,6 +5,7 @@ import ProfessionalList from './Components/ProfessionalList/ProfessionalList';
 // import BusinessList from './Components/BusinessList/BusinessList';
 import SearchBar from './Components/SearchBar/SearchBar';
 import Map from './Components/Map/Map';
+import NavigationBar from './Components/NavigationBar/NavigationBar';
 
 Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
 
@@ -125,9 +126,9 @@ export default class App extends React.Component {
         </View>
         {/* <SearchBar />
         <BusinessList businesses={businesses}/> 
-        <Map /> 
-        <ProfessionalList/> */ }
-        <Map />
+        <Map /> */ }
+        <ProfessionalList/> 
+        <NavigationBar />
       </View>  
     );
   }
