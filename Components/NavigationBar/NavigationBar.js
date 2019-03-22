@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet,View,Image,Text, Alert, TouchableHighlight} from 'react-native';
+import {StyleSheet,View,Image,Text, Alert, TouchableWithoutFeedback} from 'react-native';
 
 
 import {Font} from 'expo';
@@ -49,12 +49,12 @@ export default class NavigationBar extends Component{
     renderItems(){
         return items.map((item) => {
             return(
-                    <TouchableHighlight onPress={this.handlePress.bind(this, item)} style={styles.highlight}>
+                    <TouchableWithoutFeedback onPress={this.handlePress.bind(this, item)} style={styles.highlight}>
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <Image style={styles.imageContainer} source={this.state.active === item.title ? item.imgSrcActive : item.imgSrc} />
                             <Text style={this.state.active === item.title ? [styles.text, styles.textActive] : styles.text}>{item.title}</Text>                   
                         </View>
-                    </TouchableHighlight>
+                    </TouchableWithoutFeedback>
             )
         })
     }
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderTopWidth: 1,
         borderTopColor: '#d6d6d6',
-        height: 50
+        height: 55
     },
 
     textActive: {
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#8c8c8c',
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: "500"
     },
     imageContainer: {
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
         margin: 2
     }
 

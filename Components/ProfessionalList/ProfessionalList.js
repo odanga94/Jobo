@@ -81,14 +81,14 @@ export default class ProfessionalList extends Component{
 const styles = StyleSheet.create({
     professionalList: {
         flex: 1,
-        // backgroundColor: '#f5f5f5',
         justifyContent: 'space-between',
         display: 'flex',
         /* display: 'flex',     
         marginLeft: 4,
         alignItems: 'center', */
-        marginVertical: 20,
-        margin: 2
+        //marginVertical: 20,
+        marginLeft: 2,
+        marginRight: 2
     },
 
     itemInvisible: {

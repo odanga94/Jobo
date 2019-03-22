@@ -23,8 +23,8 @@ export default class Map extends React.Component {
           let region = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: 0.005,
-            longitudeDelta: 0.005,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
           };
           this.setState({region: region});
         },
@@ -67,11 +67,11 @@ export default class Map extends React.Component {
             longitudeDelta: 0.0421,
           }} */ showsUserLocation={true}
         />
-       <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={styles.highlight}>
+       {/* <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={styles.highlight}>
             <View style={styles.button}>
                 <Text style={styles.p}>View Services</Text>
             </View>
-        </TouchableHighlight> 
+        </TouchableHighlight> */}
       </View>     
     );
   }
