@@ -23,8 +23,8 @@ export default class Map extends React.Component {
           let region = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
           };
           this.setState({region: region});
         },

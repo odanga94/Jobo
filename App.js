@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, AppRegistry, Dimensions, TouchableHighlight } from 'react-native';
 import {Font, Constants} from 'expo';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
-import ProfessionalList from './Components/ProfessionalList/ProfessionalList';
-// import BusinessList from './Components/BusinessList/BusinessList';
 import Map from './Components/Map/Map';
-import NavigationBar from './Components/NavigationBar/NavigationBar';
+import {MainScreen} from './Components/MainScreen/MainScreen'
 
 
 Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
@@ -23,23 +21,6 @@ class HeaderMap extends Component{
   }
 } 
 
-class HeaderServices extends Component{
-  render(){
-    return(
-      <View style={styles.container}>
-        <Text style={{fontSize: 40}}>S</Text>
-        <Text style={{fontSize: 40}}>e</Text>
-        <Text style={{fontSize: 40}}>r</Text>
-        <Text style={styles.green}>v</Text>
-        <Text style={styles.yellow}>i</Text>
-        <Text style={styles.red}>c</Text>
-        <Text style={{fontSize: 40}}>e</Text>
-        <Text style={{fontSize: 40}}>s</Text>
-      </View>
-    );
-  }
-} 
-
 class MapScreen extends Component{
   static navigationOptions = {
     // headerTitle instead of title
@@ -50,7 +31,7 @@ class MapScreen extends Component{
     return(
       <View style={{flex: 1, height: Dimensions.get('window').height}}>
         <Map style={{flex: 1}}/>
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Services')} underlayColor='white' style={styles.highlight}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Main')} underlayColor='white' style={styles.highlight}>
           <View style={styles.button}>
               <Text style={styles.p}>View Services</Text>
           </View>
@@ -61,34 +42,16 @@ class MapScreen extends Component{
 }
 
 
-class ServicesScreen extends Component{
-  static navigationOptions = {
-    // headerTitle instead of title
-    headerTitle: <HeaderServices/>
-  }
-
-  render(){
-    return(
-      <View style={styles.bigContainer}>
-          {/* <View style={styles.container}>
-            <Text style={{fontSize: 40}}>J</Text>
-            <Text style={styles.green}>o</Text>
-            <Text style={styles.yellow}>b</Text>
-            <Text style={styles.red}>o</Text>
-          </View> */}
-          <ProfessionalList/> 
-          <NavigationBar />
-      </View>  
-    );
-  }
-}
 const RootStack = createStackNavigator(
   {
     Map: {
       screen: MapScreen
     },
-    Services: {
+    /* Services: {
       screen: ServicesScreen
+    } */
+    Main: {
+      screen: MainScreen
     }
   },
   {
