@@ -10,8 +10,13 @@ Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 } */
 
 export default class Professional extends Component{
+    constructor(props){
+        super(props);
+        this.onPressButton = this.onPressButton.bind(this);
+    }
     onPressButton(){
-        Alert.alert('You should be directed to request service page');
+        //Alert.alert('You should be directed to request service page');
+        this.props.handlePress(this.props.professional.category);
     }
     
 	render() {

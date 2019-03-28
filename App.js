@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, AppRegistry, Dimensions, TouchableHighlight } f
 import {Font, Constants} from 'expo';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
 import Map from './Components/Map/Map';
-import {MainScreen} from './Components/MainScreen/MainScreen'
-
+import { MainScreenContainer} from './Components/MainScreen/MainScreen';
+// import {NavigationActions} from 'react-navigation';
 
 Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
 
@@ -51,11 +51,16 @@ const RootStack = createStackNavigator(
       screen: ServicesScreen
     } */
     Main: {
-      screen: MainScreen
+      screen: MainScreenContainer,
+      // navigationOptions: {title: 'Services'}
+      navigationOptions: ({ navigation }) => ({
+        title: navigation.state.routeName,
+        header: null,
+      })
     }
   },
   {
-    initialRouteName: 'Map'
+    initialRouteName: 'Map',
   }
 );
 

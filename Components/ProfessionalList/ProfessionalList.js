@@ -9,11 +9,11 @@ Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 let professionals =[
     {
         category: 'Cleaner',
-        imgSrc: require('../../assets/ProPics/cleaner.png')
+        imgSrc: require('../../assets/ProPics/cleaner.png'),
     },
     {
         category: 'Plumber',
-        imgSrc: require('../../assets/ProPics/plumber-color.png')
+        imgSrc: require('../../assets/ProPics/plumber-color.png'),
     },
     {
         category: 'Electrician',
@@ -73,7 +73,7 @@ export default class ProfessionalList extends Component{
     render(){
         return(
             <FlatList style={styles.professionalList} numColumns={3} data={this.formatData(professionals, this.state.numColumns)}
-             renderItem={({item, index}) => {return Object.keys(item).length !== 0 ? <Professional professional={item} key={index} /> : <View style={[styles.item, styles.itemInvisible]} key={index} /> }} />
+             renderItem={({item, index}) => {return Object.keys(item).length !== 0 ? <Professional professional={item} key={index} handlePress={this.props.handlePress} /> : <View style={[styles.item, styles.itemInvisible]} key={index} /> }} />
         );
     }
 }
