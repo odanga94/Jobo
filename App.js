@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'white',
+    borderWidth: 1,
     borderRadius:  5,
     height: 40,
     justifyContent: 'center' ,
