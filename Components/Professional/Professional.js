@@ -27,11 +27,6 @@ export default class Professional extends Component{
                     <Text style={styles.category}>{this.props.professional.category}</Text>
                 </View>
             </TouchableHighlight>
-            /* <TouchableHighlight onPress={this.onPressButton} underlayColor='white' style={{marginBottom: 8}}>
-                <View style={styles.button}>
-                    <Text style={[styles.p, {fontWeight: '400'}]}>Request Service</Text>
-                </View>
-                </TouchableHighlight> */ 
 		);
 	}
 }

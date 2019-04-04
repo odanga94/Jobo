@@ -12,9 +12,6 @@ export default class Map extends React.Component {
     this.state = {region: {}}
     this.getCurrentPosition = this.getCurrentPosition.bind(this);
   }
-  onPressButton(){
-    Alert.alert('You should be directed to request service page');
-  }
 
   getCurrentPosition() {
     try {

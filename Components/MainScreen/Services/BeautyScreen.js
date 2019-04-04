@@ -27,19 +27,6 @@ const beautyDetails = t.struct({
   Terms: t.Boolean
 })
 
-const options = {
-  fields: {
-    Hairstyle: {
-      label: 'Select Hairstyle:',
-      error: 'Please select a hairstyle'
-    },
-    Terms: {
-      label: 'Agree to Terms',
-    }
-  },
-  stylesheet: formStyles
-}
-
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
@@ -65,7 +52,18 @@ const formStyles = {
   }
 }
 
-
+const options = {
+  fields: {
+    Hairstyle: {
+      label: 'Select Hairstyle:',
+      error: 'Please select a hairstyle'
+    },
+    Terms: {
+      label: 'Agree to Terms',
+    }
+  },
+  stylesheet: formStyles
+}
 
 export default class BeautyScreen extends Component{ 
     constructor(props){

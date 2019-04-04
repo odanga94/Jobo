@@ -28,19 +28,6 @@ const beautyDetails = t.struct({
   Terms: t.Boolean
 })
 
-const options = {
-  fields: {
-    Plates: {
-      label: 'How many People?',
-      error: 'Please select the number of people being cooked for'
-    },
-    Terms: {
-      label: 'Agree to Terms',
-    }
-  },
-  stylesheet: formStyles
-}
-
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
@@ -66,7 +53,18 @@ const formStyles = {
   }
 }
 
-
+const options = {
+  fields: {
+    Plates: {
+      label: 'How many People?',
+      error: 'Please select the number of people being cooked for'
+    },
+    Terms: {
+      label: 'Agree to Terms',
+    }
+  },
+  stylesheet: formStyles
+}
 
 export default class CookScreen extends Component{ 
     constructor(props){

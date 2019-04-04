@@ -7,11 +7,11 @@ import {Font, Constants} from 'expo';
 Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
 
 
-export default class BuilderScreen extends Component{ 
+export default class TechnicianScreen extends Component{ 
     render(){
       return(
         <View style={styles.bigContainer}>
-            <Text style={{fontSize: 30, fontFamily: 'Poppins'}}>Building Details go here</Text>
+            <Text style={{fontSize: 30, fontFamily: 'Poppins'}}>Technicians Details go here</Text>
         </View>  
       );
     }

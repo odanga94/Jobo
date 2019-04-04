@@ -13,7 +13,7 @@ import CookScreen from './CookScreen';
 import PainterScreen from './PainterScreen';
 import CarpenterScreen from './CarpenterScreen';
 import TaxesScreen from './TaxesScreen';
-// import BuilderScreen from './BuilderScreen';
+import TechnicianScreen from './TechnicianScreen';
 
 Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
 
@@ -113,10 +113,10 @@ const RootStack = createStackNavigator(
       navigationOptions: {title: 'Details'}
     },
 
-    /* Builder: {
-      screen: BuilderScreen,
-      navigationOptions: {title: 'Building Details'}
-    } */
+    'IT Technician' : {
+      screen: TechnicianScreen,
+      navigationOptions: {title: 'Details'}
+    } 
   },
   {
     initialRouteName: 'All Services'

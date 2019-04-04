@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'Poppins',
-    
+    alignSelf: 'center'
   },
 
   green: {

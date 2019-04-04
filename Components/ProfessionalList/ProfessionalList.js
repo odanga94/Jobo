@@ -47,10 +47,10 @@ let professionals =[
         category: 'Taxes',
         imgSrc: require('../../assets/ProPics/taxes-color.png')
     },
-    /* {
-        category: 'Builder',
-        imgSrc: require('../../assets/ProPics/builder.png')
-    }*/
+    {
+        category: 'IT Technician',
+        imgSrc: require('../../assets/ProPics/pctech.png')
+    }
 ]
 
 

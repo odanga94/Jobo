@@ -27,23 +27,6 @@ const paintingDetails = t.struct({
   Terms: t.Boolean
 })
 
-const options = {
-  fields: {
-    Rooms: {
-      label: 'Number of Rooms:',
-      error: 'Please select a number greater than or equal to zero.'
-    },
-    Color: {
-      label: 'Paint Color:',
-      error: 'Please type in the paint color that you want.'
-    },
-    Terms: {
-      label: 'Agree to Terms',
-    }
-  },
-  stylesheet: formStyles
-}
-
 const formStyles = {
   ...Form.stylesheet,
   formGroup: {
@@ -69,7 +52,22 @@ const formStyles = {
   }
 }
 
-
+const options = {
+  fields: {
+    Rooms: {
+      label: 'Number of Rooms:',
+      error: 'Please select a number greater than or equal to zero.'
+    },
+    Color: {
+      label: 'Paint Color:',
+      error: 'Please type in the paint color that you want.'
+    },
+    Terms: {
+      label: 'Agree to Terms',
+    }
+  },
+  stylesheet: formStyles
+}
 
 export default class PainterScreen extends Component{ 
     constructor(props){
