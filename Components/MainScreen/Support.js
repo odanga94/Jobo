@@ -2,30 +2,15 @@ import React, {Component} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import {Font, Constants} from 'expo';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
+import Header from '../Header/Header';
 
 
 Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
-class HeaderSupport extends Component{
-    render(){
-      return(
-        <View style={styles.container}>
-          <Text style={{fontSize: 30}}>S</Text>
-          <Text style={{fontSize: 30}}>u</Text>
-          <Text style={styles.green}>p</Text>
-          <Text style={styles.yellow}>p</Text>
-          <Text style={styles.red}>o</Text>
-          <Text style={{fontSize: 30}}>r</Text>
-          <Text style={{fontSize: 30}}>t</Text>
-        </View>
-      );
-    }
-} 
-
 export default class Support extends Component {
     static navigationOptions = {
         // headerTitle instead of title
-        headerTitle: <HeaderSupport/>
+        headerTitle: <Header title='Support'/>
     }
 
     render() {
@@ -62,7 +47,7 @@ const styles = StyleSheet.create({
         
     },
 
-    green: {
+    /* green: {
         color: '#3eb308',
         fontSize: 30
     },
@@ -75,5 +60,5 @@ const styles = StyleSheet.create({
     yellow: {
         color: '#f0d817',
         fontSize: 30
-    }
+    } */
 });

@@ -47,7 +47,7 @@ const MainScreen = createAppContainer(
           getTabBarIcon(navigation, focused, tintColor),
       }),
       tabBarOptions: {
-        activeTintColor: '#3eb308',
+        activeTintColor: '#191f4c',
         inactiveTintColor: 'gray',
       },
       initialRouteName: 'Home'

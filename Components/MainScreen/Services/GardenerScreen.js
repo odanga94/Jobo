@@ -5,12 +5,18 @@ import t from 'tcomb-form-native';
 import Stepper from 'react-native-js-stepper';
 import {Fontello} from '@expo/vector-icons';
 
+Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
 
-const IconComponent = Fontello;
+/*const IconComponent = Fontello;
 const plusIconName = 'icon-plus-circled';
 const minusIconName = 'icon-minus-circled';
-const color = 'gray';
+const color = 'gray'; */
+
 const Form = t.form.Form
+t.form.Form.stylesheet.pickerContainer.normal.borderColor = '#4bc1bc';
+t.form.Form.stylesheet.pickerValue.normal.color = 'rgb(25, 31, 76)';
+t.form.Form.stylesheet.pickerValue.normal.fontFamily = 'Poppins';
+
 function generateNumbers(limit){
   let i = 0
   let numbers = []
@@ -21,9 +27,11 @@ function generateNumbers(limit){
   return numbers
 }
 const SelectNumber = t.enums.of(generateNumbers(20).map(number => number.toString()), SelectNumber)
+const SelectService = t.enums.of(['Trim my fence', 'Plant flowers', 'Remove weeds', 'Landscaping'], SelectService)
 
 
 const gardeningDetails = t.struct({
+  Service: SelectService,
   Gardeners : SelectNumber,
   Terms: t.Boolean
 })
@@ -38,9 +46,10 @@ const formStyles = {
   controlLabel: {
     normal: {
       fontFamily: 'Poppins',
+      color: 'rgb(25, 31, 76)',
       fontSize: 20,
       marginBottom: 3,
-      fontWeight: '600'
+      fontWeight: '600',
     },
     // the style applied when a validation error occours
     error: {
@@ -55,6 +64,10 @@ const formStyles = {
 
 const options = {
   fields: {
+    Service: {
+      label: 'I need a gardener to: ',
+      error: 'Please select the type of service you would like'
+    },
     Gardeners: {
       label: 'How many gardeners do you need?',
       error: 'Please select a number greater than or equal to zero.'
@@ -136,7 +149,7 @@ export default class GardenerScreen extends React.Component{
       return (
         <View style={styles.costView}>
           <Text style={[styles.viewText, {marginRight: 20}]}>Total Cost:</Text>
-          <Text style={[styles.viewText, {color: '#3eb308'}]}>Ksh. {totalCost}</Text>
+          <Text style={[styles.viewText, {color: 'rgb(25, 31, 76)'}]}>Ksh. {totalCost}</Text>
         </View>
       )
       } else{
@@ -169,7 +182,7 @@ export default class GardenerScreen extends React.Component{
               <Form options={options} ref="form" type={gardeningDetails} onChange={this.handleChange.bind(this)} value={this.state.value} /> 
             </View>  
             <View style={styles.bigContainer}>
-              <View style={{borderBottomWidth: 1, borderBottomColor: '#3eb308', marginBottom: 20}}>
+              <View style={{borderBottomWidth: 1, borderBottomColor: '#4bc1bc', marginBottom: 20}}>
                 <Text style={[styles.viewText, {fontSize: 25}]}>Order Summary</Text>
               </View>
               {this.state.value ? this.showCost() : null}
@@ -192,16 +205,15 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    color: '#3eb308',
+    color: 'rgb(25, 31, 76)',
     fontFamily: 'Poppins',
     alignSelf: 'center'
   },
   button: {
     height: 36,
-    backgroundColor: 'white',
-    // borderColor: '#48BBEC',
+    borderColor: '#4bc1bc',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 5,
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
@@ -217,7 +229,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Poppins',
     alignSelf: 'center',
-    marginRight: 10
+    marginRight: 10,
+    color: 'rgb(25, 31, 76)'
   },
   costView: {
     flexDirection: 'row',
@@ -235,13 +248,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   activeDot: {
-    backgroundColor: '#3eb308'
+    backgroundColor: '#4bc1bc'
   },
   inactiveDot: {
     backgroundColor: '#ededed'
   },
   activeStep: {
-    backgroundColor: '#3eb308',
+    backgroundColor: '#4bc1bc',
     marginRight: 30,
     marginLeft: 30
   },
@@ -252,11 +265,12 @@ const styles = StyleSheet.create({
   },
   activeStepTitle: {
     fontWeight: 'bold',
-    fontFamily: 'Poppins'
+    fontFamily: 'Poppins',
+    color: 'rgb(25, 31, 76)'
   },
   inactiveStepTitle: {
     fontWeight: 'normal',
-    fontFamily: 'Poppins'
+    fontFamily: 'Poppins',
   },
   activeStepNumber: {
     color: 'white'
@@ -266,7 +280,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     fontFamily: 'Poppins',
-    color: '#3eb308'
+    color: 'rgb(25, 31, 76)'
   }
 })
 /* const number = t.refinement(t.Number, function (n) {

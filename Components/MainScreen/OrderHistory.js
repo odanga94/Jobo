@@ -2,31 +2,14 @@ import React, {Component} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import {Font, Constants} from 'expo';
 import {createStackNavigator, createAppContainer, NavigationActions} from 'react-navigation';
+import Header from '../Header/Header';
 
 Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
-
-class HeaderHistory extends Component{
-    render(){
-      return(
-        <View style={styles.container}>
-          <Text style={{fontSize: 30}}>M</Text>
-          <Text style={{fontSize: 30}}>y</Text>
-          <Text style={{fontSize: 30}}> </Text>
-          <Text style={styles.green}>O</Text>
-          <Text style={styles.yellow}>r</Text>
-          <Text style={styles.red}>d</Text>
-          <Text style={{fontSize: 30}}>e</Text>
-          <Text style={{fontSize: 30}}>r</Text>
-          <Text style={{fontSize: 30}}>s</Text>
-        </View>
-      );
-    }
-} 
 export class OrderHistory extends Component {
     static navigationOptions = {
         // headerTitle instead of title
-        headerTitle: <HeaderHistory/>,
+        headerTitle: <Header title='My Orders'/>,
         //header: null
     } 
 

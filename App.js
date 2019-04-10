@@ -1,30 +1,17 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, AppRegistry, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, Dimensions, TouchableHighlight, Image } from 'react-native';
 import {Font, Constants} from 'expo';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
 import Map from './Components/Map/Map';
 import { MainScreenContainer} from './Components/MainScreen/MainScreen';
-// import {NavigationActions} from 'react-navigation';
+import Header from './Components/Header/Header';
 
 Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
-
-class HeaderMap extends Component{
-  render(){
-    return(
-      <View style={styles.container}>
-        <Text style={{fontSize: 40}}>J</Text>
-        <Text style={styles.green}>o</Text>
-        <Text style={styles.yellow}>b</Text>
-        <Text style={styles.red}>o</Text>
-      </View>
-    );
-  }
-} 
 
 class MapScreen extends Component{
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <HeaderMap/>
+    headerTitle: <Header title='Map'/>
   }
 
   render(){
@@ -92,13 +79,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
 
-  green: {
-    color: '#3eb308',
-    fontSize: 40
+  darkBlue: {
+    color: '#191f4c',
+    fontSize: 40,
   },
 
-  red: {
-    color: '#e20d0d',
+  lightBlue: {
+    color: '#4bc1bc',
     fontSize: 40
   },
 
@@ -118,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     fontFamily: 'Poppins',
-    color: '#3eb308'
+    color: '#191f4c'
   },
 
   button: {
@@ -127,6 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderRadius:  5,
+    borderColor: '#4bc1bc',
     height: 40,
     justifyContent: 'center' ,
     shadowColor: 'rgb(220,220,220)',

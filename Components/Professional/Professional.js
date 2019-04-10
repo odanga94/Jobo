@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
         fontFamily: 'Poppins',
-        color: '#3eb308'
+        color: '#4bc1bc'
     },
 });

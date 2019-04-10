@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         /* display: 'flex',     
         marginLeft: 4,
-        alignItems: 'center', */
-        //marginVertical: 20,
+        alignItems: 'center', 
+        marginVertical: 20, */
         marginLeft: 2,
         marginRight: 2
     },

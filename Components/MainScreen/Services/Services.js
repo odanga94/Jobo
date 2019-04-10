@@ -14,30 +14,14 @@ import PainterScreen from './PainterScreen';
 import CarpenterScreen from './CarpenterScreen';
 import TaxesScreen from './TaxesScreen';
 import TechnicianScreen from './TechnicianScreen';
+import Header from '../../Header/Header'
 
 Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
-
-class HeaderServices extends Component{
-    render(){
-      return(
-        <View style={styles.container}>
-          <Text style={{fontSize: 30}}>S</Text>
-          <Text style={{fontSize: 30}}>e</Text>
-          <Text style={{fontSize: 30}}>r</Text>
-          <Text style={styles.green}>v</Text>
-          <Text style={styles.yellow}>i</Text>
-          <Text style={styles.red}>c</Text>
-          <Text style={{fontSize: 30}}>e</Text>
-          <Text style={{fontSize: 30}}>s</Text>
-        </View>
-      );
-    }
-} 
 
 class Services extends Component{
     static navigationOptions = {
       // headerTitle instead of title
-      headerTitle: <HeaderServices/>,
+      headerTitle: <Header title='Home'/>,
       // header: null
     }
     constructor(props){
@@ -65,61 +49,64 @@ const RootStack = createStackNavigator(
 
     Cleaner: {
       screen: CleanerScreen,
-      navigationOptions: {title: 'Cleaning Details'}
+      navigationOptions: {headerTitle: <Header title='Cleaning'/>}
     },
 
     Plumber: {
       screen: PlumberScreen,
-      navigationOptions: {title: 'Plumbing Details'}
+      navigationOptions: {headerTitle: <Header title='Plumbing'/>}
     },
 
     Electrician: {
       screen: ElectricianScreen,
-      navigationOptions: {title: 'Electricals Details'}
+      navigationOptions: {headerTitle: <Header title='Electricals'/>}
     },
 
     Gardener: {
       screen: GardenerScreen,
-      navigationOptions: {title: 'Gardening Details'}
+      navigationOptions: {headerTitle: <Header title='Gardening'/>}
     },
 
     Beauty: {
       screen: BeautyScreen,
-      navigationOptions: {title: 'Details'}
+      navigationOptions: {headerTitle: <Header title='Beauty'/>}
     },
 
     Moving: {
       screen: MovingScreen,
-      navigationOptions: {title: 'Moving Details'}
+      navigationOptions: {headerTitle: <Header title='Moving'/>}
     },
 
     Cook: {
       screen: CookScreen,
-      navigationOptions: {title: 'Cooking Details'}
+      navigationOptions: {headerTitle: <Header title='Cooking'/>}
     },
 
     Painter: {
       screen: PainterScreen,
-      navigationOptions: {title: 'Painting Details'}
+      navigationOptions: {headerTitle: <Header title='Painting'/>}
     },
 
     Carpenter: {
       screen: CarpenterScreen,
-      navigationOptions: {title: 'Details'}
+      navigationOptions: {headerTitle: <Header title='Carpenting'/>}
     },
 
     Taxes: {
       screen: TaxesScreen,
-      navigationOptions: {title: 'Details'}
+      navigationOptions: {headerTitle: <Header title='Taxes'/>}
     },
 
     'IT Technician' : {
       screen: TechnicianScreen,
-      navigationOptions: {title: 'Details'}
+      navigationOptions: {headerTitle: <Header title='IT'/>}
     } 
   },
   {
-    initialRouteName: 'All Services'
+    initialRouteName: 'All Services',
+    defaultNavigationOptions: {
+      headerTintColor: '#191f4c'
+    }
   }
 );
 
