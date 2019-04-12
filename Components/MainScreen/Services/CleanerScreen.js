@@ -3,14 +3,10 @@ import { Text, View, StyleSheet, Button, Alert, ScrollView, TouchableWithoutFeed
 import {Font} from 'expo';
 import t from 'tcomb-form-native';
 import Stepper from 'react-native-js-stepper';
-
-Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
-
+import {styles, formStyles} from './style';
+import Template from './Template';
 
 const Form = t.form.Form;
-t.form.Form.stylesheet.textbox.normal.borderColor = '#4bc1bc';
-t.form.Form.stylesheet.textbox.normal.color = 'rgb(25, 31, 76)';
-
 
 function generateNumbers(limit){
   let i = 0
@@ -30,34 +26,7 @@ const cleaningDetails = t.struct({
   Clothes : SelectNumber,
   Cars: SelectNumber,
   moreInfo: t.maybe(t.String),
-  Terms: t.Boolean
 })
-
-const formStyles = {
-  ...Form.stylesheet,
-  formGroup: {
-    normal: {
-      marginBottom: 10
-    },
-  },
-  controlLabel: {
-    normal: {
-      fontFamily: 'Poppins',
-      color: 'rgb(25, 31, 76)',
-      fontSize: 20,
-      marginBottom: 3,
-      fontWeight: '600',
-    },
-    // the style applied when a validation error occours
-    error: {
-      fontFamily: 'Poppins',
-      color: '#e20d0d',
-      fontSize: 20,
-      marginBottom: 3,
-      fontWeight: '600'
-    }
-  },
-}
 
 const options = {
   fields: {
@@ -75,41 +44,23 @@ const options = {
     },
     moreInfo: {
       label: 'More Information:',
-    },
-    Terms: {
-      label: 'Agree to Terms:',
-
     }
   },
   stylesheet: formStyles
 }
 
 
-export default class CleanerScreen extends React.Component{
+export default class CleanerScreen extends Template{
   constructor(props){
     super(props);
-    this.state = {fontLoaded: false, value: null, rates: {car: 300, clothes: 400, room: 100}};
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.showCost = this.showCost.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.clearForm = this.clearForm.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      fontLoaded: false, 
+      value: null, 
+      rates: {car: 300, clothes: 400, room: 100},
+      showCost: false
+    };
   }
 
-  async componentDidMount(){
-    await Font.loadAsync({
-      Poppins: require('../../../assets/Poppins-Regular.ttf'),
-    });
-    this.setState({fontLoaded: true});
-  }
-
-  handleChange(value){
-    this.setState({value: value})
-  }
-
-  clearForm(){
-    this.setState({value: null, showCost: false});
-  }
   handleSubmit = () => {
     const value = this.refs.form.getValue();
     console.log('value: ', value);
@@ -172,100 +123,17 @@ export default class CleanerScreen extends React.Component{
                 <Text style={[styles.viewText, {fontSize: 25}]}>Order Summary</Text>
               </View>
               {this.state.value ? this.showCost() : null}
-              <TouchableHighlight style={[styles.button, {marginTop: 20}]} onPress={this.handleSubmit} underlayColor='white'>
-                <Text style={styles.buttonText}>Request for a Cleaner</Text>
-              </TouchableHighlight>
+              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                <TouchableHighlight style={[styles.button, {marginTop: 20, marginRight: 5, flex: 1}]} onPress={this.cancelOrder} underlayColor='white'>
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={[styles.button, {marginTop: 20, flex: 2}]} onPress={this.handleSubmit} underlayColor='white'>
+                  <Text style={styles.buttonText}>Request for a Cleaner</Text>
+                </TouchableHighlight>
+              </View>
             </ScrollView>
         </Stepper>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  bigContainer: {
-    flex: 1,
-    // alignItems: 'center',
-    padding: 20,
-    justifyContent: 'center',
-    //backgroundColor: '#f5f5f5' 
-  },
-  buttonText: {
-    fontSize: 20,
-    color: 'rgb(25, 31, 76)',
-    fontFamily: 'Poppins',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    borderColor: '#4bc1bc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  scrollview: {
-    height: 70,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    marginBottom: 10,
-    alignSelf: 'stretch'
-  },
-  viewText: {
-    fontSize: 20,
-    fontFamily: 'Poppins',
-    alignSelf: 'center',
-    marginRight: 10,
-    color: 'rgb(25, 31, 76)'
-  },
-  costView: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    marginBottom: 10,
-  },
-  viewStyle: {
-    height: 100,
-    marginLeft: 10,
-    marginRight: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f5f5f5',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  activeDot: {
-    backgroundColor: '#4bc1bc'
-  },
-  inactiveDot: {
-    backgroundColor: '#ededed'
-  },
-  activeStep: {
-    backgroundColor: '#4bc1bc',
-    marginRight: 30,
-    marginLeft: 30
-  },
-  inactiveStep: {
-    backgroundColor: '#ededed',
-    marginRight: 30,
-    marginLeft: 30
-  },
-  activeStepTitle: {
-    fontWeight: 'bold',
-    fontFamily: 'Poppins',
-    color: 'rgb(25, 31, 76)'
-  },
-  inactiveStepTitle: {
-    fontWeight: 'normal',
-    fontFamily: 'Poppins',
-  },
-  activeStepNumber: {
-    color: 'white'
-  },
-  inactiveStepNumber: {
-    color: 'black'
-  },
-  textButton: {
-    fontFamily: 'Poppins',
-    color: 'rgb(25, 31, 76)'
-  }
-})

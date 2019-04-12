@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import { Text, View, StyleSheet, Button, Alert, ScrollView, TouchableHighlight } from 'react-native';
-import {Font} from 'expo';
+import React from 'react';
+import { Text, View,TouchableHighlight } from 'react-native';
 import t from 'tcomb-form-native';
-
-Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
+import Stepper from 'react-native-js-stepper';
+import {styles, formStyles} from './style';
+import Template from './Template';
 
 const Form = t.form.Form
-/* const number = t.refinement(t.Number, function (n) {
-  return n >= 0;
-}); */
+
+
 function generateNumbers(limit){
   let i = 0
   let numbers = []
@@ -19,157 +18,81 @@ function generateNumbers(limit){
   return numbers
 }
 const SelectNumber = t.enums.of(generateNumbers(20).map(number => number.toString()), SelectNumber)
+const SelectDistance = t.enums.of(['<5km', '5km - 50km', '50km - 100km', '>100km'], SelectDistance)
 
 
 const movingDetails = t.struct({
-  Trucks : SelectNumber,
-  Terms: t.Boolean
+  Trucks: SelectNumber,
+  Distance : SelectDistance,
 })
-
-const formStyles = {
-  ...Form.stylesheet,
-  formGroup: {
-    normal: {
-      marginBottom: 10
-    },
-  },
-  controlLabel: {
-    normal: {
-      fontFamily: 'Poppins',
-      fontSize: 20,
-      marginBottom: 3,
-      fontWeight: '600'
-    },
-    // the style applied when a validation error occours
-    error: {
-      fontFamily: 'Poppins',
-      color: '#e20d0d',
-      fontSize: 20,
-      marginBottom: 3,
-      fontWeight: '600'
-    }
-  }
-}
 
 const options = {
   fields: {
     Trucks: {
-      label: 'How many trucks do you need?',
-      error: 'Please select a number greater than or equal to zero.'
+      label: 'How many Trucks do you need: ',
+      error: 'Please select the number of trucks'
     },
-    Terms: {
-      label: 'Agree to Terms',
-
+    Distance: {
+      label: 'Select approximate distance: ',
+      error: 'Please select an option'
     }
   },
   stylesheet: formStyles
 }
 
-export default class CleanerScreen extends Component{
+
+export default class MovingScreen extends Template{
   constructor(props){
-    super(props)
-    this.state = {value: null};
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.showCost = this.showCost.bind(this);
+    super(props);
+    this.state = {
+      fontLoaded: false,
+      value: null, 
+      rates: {labour: 1000}
+    };
   }
 
-  handleChange(value){
-    this.setState({value: value})
-  }
-
-  clearForm(){
-    this.setState({value: null, showCost: false});
-  }
-  handleSubmit = () => {
-    const value = this.refs.form.getValue();
-    console.log('value: ', value);
-    if(!value){
-      Alert.alert('Please enter all required fields');
-    } else if(!this.state.value.Terms){
-      Alert.alert('Please agree to Terms');
-    } else{
-      Alert.alert('Form has been submitted');
-      this.clearForm();
-    }   
-  }
-
-  showCost(){
-    let totalCost = (parseInt(this.state.value.Trucks, 10) * 1000);
-    if(!isNaN(totalCost)){
-      return (
-        <View style={styles.costView}>
-          <Text style={styles.viewText}>Total Cost:</Text>
-          <Text style={[styles.viewText, {color: '#3eb308'}]}>Ksh. {totalCost}</Text>
-        </View>
-      )
-      } else{
-        return null
-      }
-  }
-
-  render(){
-    return(
-      <View style={styles.bigContainer}>
-        <Form options={options} ref="form" type={movingDetails} onChange={this.handleChange.bind(this)} value={this.state.value} />
-        <View style={{height: 200}}>
-          <ScrollView style={styles.scrollview}>
-            <Text style={[styles.buttonText, {fontSize: 18}]}>Our Terms:</Text>
-            <Text style={[styles.viewText, {fontSize: 16}]}>
-              1. The driver labour cost for hiring a single truck is Ksh. 1000 {'\n'}
-              2. Fuel charges vary depending on distance and are covered by you, the customer. {'\n'}
-              * Payment is to be done immediately after the job is complete.
-            </Text>
-          </ScrollView> 
-        </View>   
-        {this.state.value ? this.showCost() : null}
-        <TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='white'>
-          <Text style={styles.buttonText}>Request for a Mover</Text>
-        </TouchableHighlight>
-      </View>  
-    );
+  render() {
+    return (
+        <Stepper
+          ref={(ref) => {
+            this.stepper = ref
+          }}
+          validation={false}
+          activeDotStyle={styles.activeDot}
+          inactiveDotStyle={styles.inactiveDot}
+          showTopStepper={true}
+          showBottomStepper={true}
+          steps={['Fill Details', 'Checkout']}
+          backButtonTitle="BACK"
+          nextButtonTitle="NEXT"
+          textButtonsStyle={styles.textButton}
+          activeStepStyle={styles.activeStep}
+          inactiveStepStyle={styles.inactiveStep}
+          activeStepTitleStyle={styles.activeStepTitle}
+          inactiveStepTitleStyle={styles.inactiveStepTitle}
+          activeStepNumberStyle={styles.activeStepNumber}
+          inactiveStepNumberStyle={styles.inactiveStepNumber}>
+            <View style={styles.bigContainer}>
+              <Form options={options} ref="form" type={movingDetails} onChange={this.handleChange.bind(this)} value={this.state.value} /> 
+              <Text style={styles.viewText}>*Implement features like that of taxis to calculate fuel price*</Text>
+            </View>  
+            <View style={styles.bigContainer}>
+              <View style={{borderBottomWidth: 1, borderBottomColor: '#4bc1bc', marginBottom: 20}}>
+                <Text style={[styles.viewText, {fontSize: 25}]}>Order Summary</Text>
+              </View>
+              {this.state.value ? this.showCost() : null}
+              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                <TouchableHighlight style={[styles.button, {marginTop: 20, marginRight: 5, flex: 1}]} onPress={this.cancelOrder} underlayColor='white'>
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={[styles.button, {marginTop: 20, flex: 2}]} onPress={this.handleSubmit} underlayColor='white'>
+                  <Text style={styles.buttonText}>Request for a Mover</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+        </Stepper>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-    bigContainer: {
-        flex: 1,
-        // alignItems: 'center',
-        padding: 20,
-        //justifyContent: 'center',
-        backgroundColor: '#f5f5f5' 
-    },
-    buttonText: {
-      fontSize: 20,
-      color: '#3eb308',
-      fontFamily: 'Poppins',
-      alignSelf: 'center'
-    },
-    button: {
-      height: 36,
-      backgroundColor: 'white',
-      // borderColor: '#48BBEC',
-      borderWidth: 1,
-      borderRadius: 8,
-      marginBottom: 10,
-      alignSelf: 'stretch',
-      justifyContent: 'center'
-    },
-    scrollview: {
-      height: 70,
-      backgroundColor: 'white',
-      borderWidth: 1,
-      marginBottom: 10,
-      alignSelf: 'stretch'
-    },
-    viewText: {
-      fontSize: 20,
-      fontFamily: 'Poppins',
-      alignSelf: 'center',
-      marginRight: 10
-    },
-    costView: {
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      marginBottom: 10,
-    }
-});
+
