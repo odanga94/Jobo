@@ -1,5 +1,8 @@
 import {StyleSheet} from 'react-native';
 import t from 'tcomb-form-native';
+import {Font} from 'expo';
+
+Font.loadAsync({Poppins: require('../../../assets/Poppins-Regular.ttf')});
 
 const Form = t.form.Form;
 t.form.Form.stylesheet.pickerContainer.normal.borderColor = '#4bc1bc';

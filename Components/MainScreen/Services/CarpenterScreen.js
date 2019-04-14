@@ -1,33 +1,8 @@
-import React from 'react';
-import { Text, View, ScrollView,TouchableHighlight, Image} from 'react-native';
 import t from 'tcomb-form-native';
-import Stepper from 'react-native-js-stepper';
-import {Fontello} from '@expo/vector-icons';
-import {styles, formStyles} from './style';
+import {formStyles} from './style';
 import Template from './Template';
 
-const Form = t.form.Form
 const SelectFault = t.enums.of(['N/A','glass fittings', 'broken furniture'], SelectFault)
-
-
-const carpenterDetails = t.struct({
-  Fault : SelectFault,
-  moreInfo : t.maybe(t.String)
-})
-
-const options = {
-  fields: {
-    Fault: {
-      label: 'Select the type of fault:',
-      error: 'Please select an item from the list. If none select N/A'
-    },
-    moreInfo:{
-      label: 'More Information:',
-    }
-  },
-  stylesheet: formStyles
-}
-let IconComponent = Fontello;
 
 export default class CarpenterScreen extends Template{
   constructor(props){
@@ -37,60 +12,26 @@ export default class CarpenterScreen extends Template{
       value: null, 
       rates: {labour: 1000}, 
       image: null, 
+      details: t.struct({
+        Fault : SelectFault,
+        moreInfo : t.maybe(t.String)
+      }),
+      options: {
+        fields: {
+          Fault: {
+            label: 'Select the type of fault:',
+            error: 'Please select an item from the list. If none select N/A'
+          },
+          moreInfo:{
+            label: 'More Information:',
+          }
+        },
+        stylesheet: formStyles
+      },
+      showImage: true,
+      buysParts: true,
+      category: 'Carpenter'
     };
-  }
-
-  render() {
-    let {image} = this.state;
-    return (
-        <Stepper
-          ref={(ref) => {
-            this.stepper = ref
-          }}
-          validation={false}
-          activeDotStyle={styles.activeDot}
-          inactiveDotStyle={styles.inactiveDot}
-          showTopStepper={true}
-          showBottomStepper={true}
-          steps={['Fill Details', 'Checkout']}
-          backButtonTitle="BACK"
-          nextButtonTitle="NEXT"
-          textButtonsStyle={styles.textButton}
-          activeStepStyle={styles.activeStep}
-          inactiveStepStyle={styles.inactiveStep}
-          activeStepTitleStyle={styles.activeStepTitle}
-          inactiveStepTitleStyle={styles.inactiveStepTitle}
-          activeStepNumberStyle={styles.activeStepNumber}
-          inactiveStepNumberStyle={styles.inactiveStepNumber}>
-            <ScrollView style={styles.bigContainer}>
-              <Form options={options} ref="form" type={carpenterDetails} onChange={this.handleChange.bind(this)} value={this.state.value} />
-                <Text style={styles.viewText}>If you like, tap below to add a photo to better describe your problem:</Text>
-                {image ?
-                  <TouchableHighlight onPress={this.pickImage}>
-                    <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-                  </TouchableHighlight> :
-                  <TouchableHighlight style={styles.highlight} onPress={this.pickImage}>
-                      <IconComponent name='icon-camera' size={25}/>
-                  </TouchableHighlight>
-                }
-              <Text style={[styles.viewText, {alignSelf: 'stretch', fontSize: 16, marginTop: 3}]}>*Kindly note that the cost of necessary materials and parts shall be covered by you, the Customer.</Text> 
-            </ScrollView>  
-            <ScrollView style={styles.bigContainer}>
-              <View style={{borderBottomWidth: 1, borderBottomColor: '#4bc1bc', marginBottom: 20}}>
-                <Text style={[styles.viewText, {fontSize: 25}]}>Order Summary</Text>
-              </View>
-              {this.state.value ? this.showCost() : null}
-              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableHighlight style={[styles.button, {marginTop: 20, marginRight: 5, flex: 1}]} onPress={this.cancelOrder} underlayColor='white'>
-                  <Text style={styles.buttonText}>Cancel</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={[styles.button, {marginTop: 20, flex: 2}]} onPress={this.handleSubmit} underlayColor='white'>
-                  <Text style={styles.buttonText}>Request for a Carpenter</Text>
-                </TouchableHighlight>
-              </View>
-            </ScrollView>
-        </Stepper>
-    )
   }
 }
 
