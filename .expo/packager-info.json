@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 8042,
-  "expoServerNgrokUrl": "https://zv-6gf.odanga.jobo.exp.direct",
-  "packagerNgrokUrl": "https://packager.zv-6gf.odanga.jobo.exp.direct",
-  "ngrokPid": 8171,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
