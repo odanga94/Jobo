@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, AppRegistry, Dimensions, TouchableHighlight, Image } from 'react-native';
-import {Font, Constants} from 'expo';
+import {Font, Constants, AppLoading, Asset} from 'expo';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
 import Map from './Components/Map/Map';
 import { MainScreenContainer} from './Components/MainScreen/MainScreen';
 import Header from './Components/Header/Header';
-
-Font.loadAsync({Poppins: require('./assets/Poppins-Regular.ttf')});
+import Login from './Components/Login/Login'
 
 class MapScreen extends Component{
   static navigationOptions = {
@@ -34,9 +33,13 @@ const RootStack = createStackNavigator(
     Map: {
       screen: MapScreen
     },
-    /* Services: {
-      screen: ServicesScreen
-    } */
+    Login: {
+      screen: Login,
+      navigationOptions: ({ navigation }) => ({
+        title: navigation.state.routeName,
+        header: null
+      })
+    },
     Main: {
       screen: MainScreenContainer,
       // navigationOptions: {title: 'Services'}
@@ -47,14 +50,58 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Map',
+    initialRouteName: 'Login',
   }
 );
 
 const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isReady: false
+    }
+    this.cacheResourcesAsync = this.cacheResourcesAsync.bind(this);
+  }
+
+  async cacheResourcesAsync(){
+    await Font.loadAsync({
+      Poppins: require('./assets/Poppins-Regular.ttf')
+    });
+
+    const images = [
+      require('./assets/Jobo_Icon.png'),
+      require('./assets/ProPics/builder.png'),
+      require('./assets/ProPics/cargo-truck-color.png'),
+      require('./assets/ProPics/carpenter.png'),
+      require('./assets/ProPics/cleaner.png'),
+      require('./assets/ProPics/cook.png'),
+      require('./assets/ProPics/gardener_landscaper-color.png'),
+      require('./assets/ProPics/painter.png'),
+      require('./assets/ProPics/pctech.png'),
+      require('./assets/ProPics/plumber-color.png'),
+      require('./assets/ProPics/salon_barber-color.png'),
+      require('./assets/ProPics/taxes-color.png'),
+
+    ]
+
+    const cacheImages = images.map((image) => {
+      return Asset.fromModule(image).downloadAsync();
+    });
+    return Promise.all(cacheImages); 
+  }
+
   render() {
+    if(!this.state.isReady){
+      return(
+        <AppLoading 
+          startAsync={this.cacheResourcesAsync}
+          onFinish ={() => this.setState({isReady: true})}
+          onError={console.warn}
+        />
+      )
+    }
     return (
       <AppContainer/>
     );

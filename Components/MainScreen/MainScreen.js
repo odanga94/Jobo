@@ -1,16 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import {Font, Constants} from 'expo';
 import {Fontello} from '@expo/vector-icons'; // 6.2.2
-import { createBottomTabNavigator, createAppContainer, createStackNavigator, NavigationActions } from 'react-navigation';
-import {OrderHistory, OrderHistoryStack} from './OrderHistory';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import {OrderHistoryStack} from './OrderHistory';
 import ServicesStack from './Services/Services';
-import {Settings, SettingsScreen} from './Settings';
-import {Support, SupportScreen} from './Support';
-import {UserProfile, UserProfileScreen} from './UserProfile';
+import {SettingsScreen} from './Settings';
+import {SupportScreen} from './Support';
+import {UserProfileScreen} from './UserProfile';
 
-
-Font.loadAsync({Poppins: require('../../assets/Poppins-Regular.ttf')});
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
