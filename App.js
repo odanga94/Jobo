@@ -67,7 +67,8 @@ export default class App extends React.Component {
 
   async cacheResourcesAsync(){
     await Font.loadAsync({
-      Poppins: require('./assets/Poppins-Regular.ttf')
+      Poppins: require('./assets/Poppins-Regular.ttf'),
+      Fontello: require('./assets/fontello/fontello.ttf')
     });
 
     const images = [
@@ -83,7 +84,8 @@ export default class App extends React.Component {
       require('./assets/ProPics/plumber-color.png'),
       require('./assets/ProPics/salon_barber-color.png'),
       require('./assets/ProPics/taxes-color.png'),
-
+      require('./assets/facebook.png'),
+      require('./assets/google.png')
     ]
 
     const cacheImages = images.map((image) => {

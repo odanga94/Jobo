@@ -10,8 +10,11 @@ export default class Login extends Component {
   constructor(props){
       super(props);
       this.state = {
-          email: 'johnbrian609@gmail.com',
-          password: 'MySuperSecretPassword!',
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          email: '',
+          password: '',
           errorMessage: ''
       }
       this.handleChange = this.handleChange.bind(this);
@@ -53,6 +56,8 @@ export default class Login extends Component {
       <View style={styles.container}>
         <Image source={require('../../assets/Jobo_Icon.png')} style={styles.logo} />
         <LoginForm 
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
           email={this.state.email}
           password={this.state.password} 
           handleChange={this.handleChange}
@@ -88,8 +93,8 @@ const styles = StyleSheet.create({
       fontFamily: 'Poppins'
     },
     logo: {
-      width: 300,
-      height: 300,
+      width: 200,
+      height: 200,
       alignSelf: 'center'
     }
 })
