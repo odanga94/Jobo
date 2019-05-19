@@ -6,7 +6,7 @@ import {styles} from './styles';
 
 let IconComponent = createIconSetFromFontello(fontelloConfig, 'Fontello');
 
-export default class EmailLogin extends Component{
+export default class EmailSignUp extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -102,7 +102,7 @@ export default class EmailLogin extends Component{
                     onEndEditing={() => this.handleStyleChange('passwordGotFocus', this.state.passwordGotFocus)}
                 />
               </View>
-              <TouchableOpacity onPress={this.props.handleSignIn} style={[styles.button, styles.signIn]}>
+              <TouchableOpacity onPress={this.props.handleSignUp} style={[styles.button, styles.signIn]}>
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
             </ScrollView>

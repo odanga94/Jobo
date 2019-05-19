@@ -33,13 +33,6 @@ const RootStack = createStackNavigator(
     Map: {
       screen: MapScreen
     },
-    Login: {
-      screen: Login,
-      navigationOptions: ({ navigation }) => ({
-        title: navigation.state.routeName,
-        header: null
-      })
-    },
     Main: {
       screen: MainScreenContainer,
       // navigationOptions: {title: 'Services'}
@@ -50,7 +43,7 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Map',
   }
 );
 
@@ -60,9 +53,16 @@ export default class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      isReady: false
+      isReady: false,
+      token: ''
     }
     this.cacheResourcesAsync = this.cacheResourcesAsync.bind(this);
+    this.handleChangeToken = this.handleChangeToken.bind(this);
+  }
+
+  handleChangeToken(token){
+    this.setState({ token });
+    console.log(this.state.token);
   }
 
   async cacheResourcesAsync(){
@@ -104,9 +104,10 @@ export default class App extends React.Component {
         />
       )
     }
-    return (
-      <AppContainer/>
-    );
+    if (this.state.token === ''){
+      return <Login handleChangeToken={this.handleChangeToken}/>
+    }
+    return <AppContainer token={this.state.token}/>
   }
 }
 

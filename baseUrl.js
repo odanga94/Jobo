@@ -1,3 +1,3 @@
-const baseUrl = 'http://10.112.15.153:4000';
+const baseUrl = 'http://192.168.100.3:4000';
 
 module.exports = baseUrl;

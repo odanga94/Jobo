@@ -10,11 +10,11 @@ export default class Login extends Component {
   constructor(props){
       super(props);
       this.state = {
-          firstName: '',
-          lastName: '',
-          phoneNumber: '',
-          email: '',
-          password: '',
+          firstName: 'John',
+          lastName: 'Odanga',
+          phoneNumber: '0799848807',
+          email: 'odangajohn@gmail.com',
+          password: 'jobopass',
           errorMessage: ''
       }
       this.handleChange = this.handleChange.bind(this);
@@ -30,8 +30,8 @@ export default class Login extends Component {
 
   async handleSignUp(){
     try{
-      const { email, password } = this.state;
-      await axios.post('/users/auth/signup', { email, password });
+      const { firstName, lastName, phoneNumber, email, password } = this.state;
+      await axios.post('/users/auth/signup', { firstName, lastName, phoneNumber, email, password });
       this.handleSignIn();
     } catch(error){
       this.setState({errorMessage: error.response.data.error.message})
@@ -58,6 +58,7 @@ export default class Login extends Component {
         <LoginForm 
           firstName={this.state.firstName}
           lastName={this.state.lastName}
+          phoneNumber={this.state.phoneNumber}
           email={this.state.email}
           password={this.state.password} 
           handleChange={this.handleChange}

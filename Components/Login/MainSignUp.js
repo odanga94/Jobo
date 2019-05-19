@@ -6,7 +6,7 @@ import {styles} from './styles';
 
 let IconComponent = createIconSetFromFontello(fontelloConfig, 'Fontello');
 
-export default class MainLogin extends Component{
+export default class MainSignUp extends Component{
     constructor(props){
         super(props);
     }
@@ -18,15 +18,15 @@ export default class MainLogin extends Component{
                 <TouchableOpacity onPress={this.props.handleSignIn} style={[styles.button, {marginTop: 20}]}>
                     <Image source={require('../../assets/facebook.png')} style={{width: 50, height: 50}} />
                     <View style={[{backgroundColor: '#39559F'}, styles.textContainer]}>
-                    <Text style={styles.buttonText}>Sign up with Facebook</Text>
+                        <Text style={styles.buttonText}>Sign up with Facebook</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.props.handleSignIn} style={styles.button}>
                     <View style={{backgroundColor: 'rgba(231, 67, 54, 0.7)'}}>
-                    <Image source={require('../../assets/google.png')} style={{width: 50, height: 50}} />
+                        <Image source={require('../../assets/google.png')} style={{width: 50, height: 50}} />
                     </View>
                     <View style={[{backgroundColor: '#E74336'}, styles.textContainer]}>
-                    <Text style={styles.buttonText}>Sign up with Google</Text>
+                        <Text style={styles.buttonText}>Sign up with Google</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
@@ -34,7 +34,13 @@ export default class MainLogin extends Component{
                     <Text style={styles.formLabel}>OR</Text>
                     <View style={styles.line}></View>
                 </View>
-                <TouchableOpacity onPress={this.props.handleLoginTypeChange} style={[styles.button, {height: 50}]}>
+                <TouchableOpacity 
+                    onPress={() => {
+                        this.props.handleSignUpTypeChange();
+                        this.props.handleShowOptionsChange();
+                    }} 
+                    style={[styles.button, {height: 50}]}
+                >
                     <View style={{backgroundColor: 'rgb(25, 31, 76)', alignItems: 'center', justifyContent: 'center'}}>
                         <IconComponent 
                         name='mail-alt' size={30}
