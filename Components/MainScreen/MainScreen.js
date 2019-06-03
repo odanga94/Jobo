@@ -6,22 +6,25 @@ import ServicesStack from './Services/Services';
 import {SettingsScreen} from './Settings';
 import {SupportScreen} from './Support';
 import {UserProfileScreen} from './UserProfile';
+import { createIconSetFromFontello } from '@expo/vector-icons';
+import fontelloConfig from '../../assets/fontello/config.json';
+
+let IconComponent = createIconSetFromFontello(fontelloConfig, 'Fontello');
 
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
-  let IconComponent = Fontello;
   let iconName;
   if (routeName === 'Home') {
-    iconName = `icon-home`;
+    iconName = `home`;
   } else if (routeName === 'Me') {
-    iconName = `icon-user-circle`;
+    iconName = `user-circle`;
   } else if (routeName === 'Order History'){
-    iconName = 'icon-history'
+    iconName = 'history'
   } else if (routeName === 'Support'){
-    iconName = 'icon-help-circled'
+    iconName = 'help-circled'
   } else if (routeName === 'Settings'){
-    iconName = 'icon-cog-alt'
+    iconName = 'cog-alt'
   }
 
   // You can return any component that you like here!

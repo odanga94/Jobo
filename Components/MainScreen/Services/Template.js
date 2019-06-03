@@ -3,11 +3,12 @@ import { Text, View, Alert, ScrollView,TouchableHighlight, Image, ActionSheetIOS
 import {Font, ImagePicker, Permissions} from 'expo';
 import t from 'tcomb-form-native';
 import Stepper from 'react-native-js-stepper';
-import {Fontello} from '@expo/vector-icons';
+import { createIconSetFromFontello } from '@expo/vector-icons';
+import fontelloConfig from '../../../assets/fontello/config.json';
 import CameraScreen from '../../Camera/CameraScreen';
 import {styles} from './style';
 
-const IconComponent = Fontello;
+const IconComponent = createIconSetFromFontello(fontelloConfig, 'Fontello');
 function generateNumbers(limit){
   let i = 0
   let numbers = []
@@ -137,7 +138,7 @@ export default class Template extends Component{
                       <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
                     </TouchableHighlight> :
                     <TouchableHighlight style={styles.highlight} onPress={this.pickImage}>
-                        <IconComponent name='icon-camera' size={25}/>
+                        <IconComponent name='camera' size={25}/>
                     </TouchableHighlight>) : null
                   }
                {this.state.buysParts ? <Text style={[styles.viewText, {alignSelf: 'stretch', fontSize: 16, marginTop: 3}]}>*Kindly note that the cost of necessary materials and parts shall be covered by you, the Customer.</Text> : null}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import EmailSignUp from './EmailSignUp';
 import MainSignUp from './MainSignUp';
+import MainLogIn from './MainLogin'
 
 
 export default class LoginForm extends Component {
@@ -54,7 +55,7 @@ export default class LoginForm extends Component {
           phoneNumber={this.props.phoneNumber}
           email={this.props.email}
           password={this.props.password}
-        /> :  null     
+        /> :  <MainLogIn  handleChange={this.props.handleChange} email={this.props.email} password={this.props.password} handleSignIn={this.props.handleSignIn} />    
         }
       </View>
     );

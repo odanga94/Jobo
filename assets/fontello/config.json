@@ -7,6 +7,12 @@
   "ascent": 850,
   "glyphs": [
     {
+      "uid": "dc3f1d5b1d006f7f7b3b6295eccab9da",
+      "css": "camera",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
       "uid": "ccc2329632396dc096bb638d4b46fb98",
       "css": "mail-alt",
       "code": 61664,
@@ -15,7 +21,7 @@
     {
       "uid": "8beac4a5fd5bed9f82ca7a96cc8ba218",
       "css": "key",
-      "code": 59392,
+      "code": 59393,
       "src": "entypo"
     },
     {
@@ -27,13 +33,13 @@
     {
       "uid": "17ebadd1e3f274ff0205601eef7b9cc4",
       "css": "help-circled",
-      "code": 59393,
+      "code": 59394,
       "src": "fontawesome"
     },
     {
       "uid": "98687378abd1faf8f6af97c254eb6cd6",
       "css": "cog-alt",
-      "code": 59394,
+      "code": 59395,
       "src": "fontawesome"
     },
     {
@@ -45,7 +51,7 @@
     {
       "uid": "d7271d490b71df4311e32cdacae8b331",
       "css": "home",
-      "code": 59395,
+      "code": 59396,
       "src": "fontawesome"
     }
   ]
